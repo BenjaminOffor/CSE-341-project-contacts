@@ -4,6 +4,40 @@ Content-Type: application/json
 
 ###
 
-### Get contact by ID
+### Get contact by ID - Benjamin Offor
 GET http://localhost:3000/contacts/686ee3bfcab96867a2cfb423
+Content-Type: application/json
+
+###
+
+### Create a new contact
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Wonderland",
+  "email": "alice@example.com",
+  "favoriteColor": "Pink",
+  "birthday": "1993-05-10"
+}
+
+###
+
+### Update contact - Priscilla Cobblah
+PUT http://localhost:3000/contacts/686ee4e8cab96867a2cfb437
+Content-Type: application/json
+
+{
+  "firstName": "Priscilla",
+  "lastName": "Cobblah",
+  "email": "priscilla.new@example.com",
+  "favoriteColor": "Lavender",
+  "birthday": "1985-11-03"
+}
+
+###
+
+### Delete contact - John Doe
+DELETE http://localhost:3000/contacts/686ee513cab96867a2cfb438
 Content-Type: application/json
