@@ -5,10 +5,11 @@ info:
   description: A simple API to manage contacts
 
 servers:
-  - url: http://localhost:3000
-    description: Local server
   - url: https://cse-341-project-contacts.onrender.com
     description: Deployed server
+  - url: http://localhost:3000
+    description: Local server
+
 
 paths:
   /contacts:
