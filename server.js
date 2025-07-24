@@ -2,8 +2,13 @@
 
 const express = require('express');
 const { connectToDb } = require('./db/connect');
-const contactsRoute = require('./routes/contacts'); // Moved below Express import
+const contactsRoute = require('./routes/contacts');
 require('dotenv').config();
+
+// 🔹 Swagger setup
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +21,9 @@ connectToDb();
 
 // Use contacts route
 app.use('/contacts', contactsRoute);
+
+// 🔹 Swagger route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Root route
 app.get('/', (req, res) => {

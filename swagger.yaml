@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: Contacts API
+  version: 1.0.0
+  description: A simple API to manage contacts
+
+servers:
+  - url: http://localhost:3000
+    description: Local server
+  - url: https://cse-341-project-contacts.onrender.com
+    description: Deployed server
+
+paths:
+  /contacts:
+    get:
+      summary: Get all contacts
+      responses:
+        '200':
+          description: A list of contacts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+    post:
+      summary: Create a new contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '201':
+          description: Contact created successfully
+
+  /contacts/{id}:
+    get:
+      summary: Get a contact by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Contact ID
+      responses:
+        '200':
+          description: Contact found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          description: Contact not found
+
+    put:
+      summary: Update a contact
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Contact ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: Contact updated successfully
+
+    delete:
+      summary: Delete a contact
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Contact ID
+      responses:
+        '200':
+          description: Contact deleted successfully
+
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Alice
+        lastName:
+          type: string
+          example: Wonderland
+        email:
+          type: string
+          example: alice@example.com
+        favoriteColor:
+          type: string
+          example: Pink
+        birthday:
+          type: string
+          example: 1993-05-10
