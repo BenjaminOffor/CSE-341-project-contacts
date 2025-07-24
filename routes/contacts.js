@@ -1,35 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { ObjectId } = require('mongodb');
-const { getDb } = require('../db/connect');
+const contactsController = require('../controllers/contacts');
 
-// GET all contacts
-router.get('/', async (req, res) => {
-  const db = getDb();
-  try {
-    const contacts = await db.collection('contacts').find().toArray();
-    res.status(200).json(contacts);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to retrieve contacts' });
-  }
-});
+// Route for all contacts
+router.get('/', contactsController.getAllContacts);
 
-// GET single contact by ID
-router.get('/:id', async (req, res) => {
-  const db = getDb();
-  try {
-    const contact = await db
-      .collection('contacts')
-      .findOne({ _id: new ObjectId(req.params.id) });
-
-    if (!contact) {
-      return res.status(404).json({ message: 'Contact not found' });
-    }
-
-    res.status(200).json(contact);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to retrieve contact' });
-  }
-});
+// Route for single contact by ID
+router.get('/:id', contactsController.getContactById);
 
 module.exports = router;
